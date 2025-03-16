@@ -4,3 +4,12 @@ metadata:
   name: backend
   labels:
     app: backend
+spec:
+  replicas: 2 # Run 2 instances for high availability
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
