@@ -1,0 +1,9 @@
+# Ignore logs and temporary files
+*.log
+node_modules/
+.env
+.DS_Store
+
+# Ignore Terraform state files
+terraform.tfstate
+terraform.tfstate.backup
