@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: social-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: social-frontend
+  template:
+    metadata:
+      labels:
+        app: social-frontend
+    spec:
+      containers:
+        - name: social-frontend
+          image: us-central1-docker.pkg.dev/social-media-app-454303/social-repo/social-frontend:latest
+          ports:
+            - containerPort: 80
