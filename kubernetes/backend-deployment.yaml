@@ -1,15 +1,72 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: backend
+  name: social-backend
   labels:
-    app: backend
+    app: social-backend
 spec:
-  replicas: 2 # Run 2 instances for high availability
+  replicas: 2
   selector:
     matchLabels:
-      app: backend
+      app: social-backend
   template:
     metadata:
       labels:
-        app: backend
+        app: social-backend
+    spec:
+      containers:
+        - name: social-backend
+          image: us-central1-docker.pkg.dev/social-media-app-454303/social-repo/social-backend:latest
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: db-host
+                  key: latest
+            - name: DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: db-username
+                  key: latest
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: db-password
+                  key: latest
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: db-database
+                  key: latest
+            - name: DB_DIALECT
+              valueFrom:
+                secretKeyRef:
+                  name: db-dialect
+                  key: latest
+            - name: PORT
+              valueFrom:
+                secretKeyRef:
+                  name: port
+                  key: latest
+            - name: GOOGLE_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: google-client-id
+                  key: latest
+            - name: GOOGLE_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: google-client-secret
+                  key: latest
+            - name: GOOGLE_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  name: google-callback-url
+                  key: latest
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: latest
