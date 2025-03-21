@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         app: social-backend
+      annotations:
+        cloud.google.com/backend-config: '{"default": "social-health-check"}'
     spec:
       containers:
         - name: social-backend
